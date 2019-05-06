@@ -177,7 +177,7 @@ public class JdbcProductRepository implements ProductRepository {
             conn = DBUtils.getConnection();
             pstmt = conn.prepareStatement("INSERT INTO producto (descripcion, id_categoria, precio_unit, cantidad) VALUES (?, ?, ?, ?)");
 
-            pstmt.setString(1, entity.getNombre());
+            pstmt.setString(1, entity.getDescripcion());
             pstmt.setInt(2, entity.getIdCategoria());
             pstmt.setDouble(3, entity.getPrecioUnit());
             pstmt.setInt(4, entity.getCantidad());
@@ -232,7 +232,7 @@ public class JdbcProductRepository implements ProductRepository {
             conn = DBUtils.getConnection();
             pstmt = conn.prepareStatement("UPDATE producto SET descripcion = ?, id_categoria = ?, precio_unit = ?, cantidad = ? WHERE id_producto = ?");
 
-            pstmt.setString(1, entity.getNombre());
+            pstmt.setString(1, entity.getDescripcion());
             pstmt.setInt(2, entity.getIdCategoria());
             pstmt.setDouble(3, entity.getPrecioUnit());
             pstmt.setInt(4, entity.getCantidad());
@@ -277,7 +277,7 @@ public class JdbcProductRepository implements ProductRepository {
             if (rs.next()) {
                 retValue = new Product(rs.getInt("id_producto"), rs.getString("descripcion"), rs.getInt("id_categoria"), rs.getDouble("precio_unit"), rs.getInt("cantidad"));
             } else {
-                retValue = new Product(null, null, 0, 0, 0);
+                retValue = new Product(0, null, 0, 0, 0);
             }
 
         } catch (Exception e) {

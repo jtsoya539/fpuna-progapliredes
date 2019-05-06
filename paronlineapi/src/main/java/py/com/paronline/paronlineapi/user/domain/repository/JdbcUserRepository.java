@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import py.com.paronline.paronlineapi.util.DBUtils;
-import py.com.paronline.paronlineapi.common.domain.model.entity.Entity;
 import py.com.paronline.paronlineapi.user.domain.model.entity.User;
 
 /**

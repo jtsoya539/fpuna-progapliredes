@@ -8,7 +8,6 @@ package py.com.paronline.paronlineapi.product.domain.service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
-import py.com.paronline.paronlineapi.common.domain.model.entity.Entity;
 import py.com.paronline.paronlineapi.common.domain.service.BaseService;
 import py.com.paronline.paronlineapi.product.domain.model.entity.Product;
 import py.com.paronline.paronlineapi.product.domain.repository.ProductRepository;
@@ -28,11 +27,11 @@ public class ProductServiceImpl extends BaseService<Product, Integer> implements
 
     @Override
     public void add(Product product) throws Exception {
-        if (this.productRepository.containsNombre(product.getNombre())) {
-            throw new Exception(String.format("Ya existe un producto con la descripcion %s", product.getNombre()));
+        if (this.productRepository.containsNombre(product.getDescripcion())) {
+            throw new Exception(String.format("Ya existe un producto con la descripcion %s", product.getDescripcion()));
         }
 
-        if (product.getNombre() == null || "".equals(product.getNombre())) {
+        if (product.getDescripcion() == null || "".equals(product.getDescripcion())) {
             throw new Exception("La descripcion del producto no puede ser nulo o cadena vacia.");
         }
 
@@ -50,7 +49,7 @@ public class ProductServiceImpl extends BaseService<Product, Integer> implements
     }
 
     @Override
-    public Entity findById(Integer id) throws Exception {
+    public Product findById(Integer id) throws Exception {
         return this.productRepository.get(id);
     }
 

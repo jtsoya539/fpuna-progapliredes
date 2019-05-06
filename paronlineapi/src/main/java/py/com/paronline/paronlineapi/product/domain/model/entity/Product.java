@@ -5,33 +5,52 @@
  */
 package py.com.paronline.paronlineapi.product.domain.model.entity;
 
-import py.com.paronline.paronlineapi.common.domain.model.entity.BaseEntity;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author javie
  */
-public class Product extends BaseEntity<Integer> {
+@XmlRootElement
+public class Product {
 
+    private int id;
+    private String descripcion;
     private int idCategoria;
     private double precioUnit;
     private int cantidad;
 
     public Product() {
-        super(0, "Sin nombre");
     }
 
-    public Product(Integer id, String nombre) {
-        super(id, nombre);
-    }
-
-    public Product(Integer id, String nombre, int idCategoria, double precioUnit, int cantidad) {
-        super(id, nombre);
+    public Product(int id, String descripcion, int idCategoria, double precioUnit, int cantidad) {
+        this.id = id;
+        this.descripcion = descripcion;
         this.idCategoria = idCategoria;
         this.precioUnit = precioUnit;
         this.cantidad = cantidad;
     }
 
+    @XmlElement
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @XmlElement
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    @XmlElement
     public int getIdCategoria() {
         return idCategoria;
     }
@@ -40,6 +59,7 @@ public class Product extends BaseEntity<Integer> {
         this.idCategoria = idCategoria;
     }
 
+    @XmlElement
     public double getPrecioUnit() {
         return precioUnit;
     }
@@ -48,6 +68,7 @@ public class Product extends BaseEntity<Integer> {
         this.precioUnit = precioUnit;
     }
 
+    @XmlElement
     public int getCantidad() {
         return cantidad;
     }
@@ -58,7 +79,7 @@ public class Product extends BaseEntity<Integer> {
 
     @Override
     public String toString() {
-        return "Product{" + "idCategoria=" + idCategoria + ", precioUnit=" + precioUnit + ", cantidad=" + cantidad + '}';
+        return "Product{" + "id=" + id + ", descripcion=" + descripcion + ", idCategoria=" + idCategoria + ", precioUnit=" + precioUnit + ", cantidad=" + cantidad + '}';
     }
 
 }

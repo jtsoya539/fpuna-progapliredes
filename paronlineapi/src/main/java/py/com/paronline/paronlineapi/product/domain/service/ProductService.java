@@ -8,7 +8,6 @@ package py.com.paronline.paronlineapi.product.domain.service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
-import py.com.paronline.paronlineapi.common.domain.model.entity.Entity;
 import py.com.paronline.paronlineapi.product.domain.model.entity.Product;
 
 /**
@@ -23,7 +22,7 @@ public interface ProductService {
 
     public void delete(Integer id) throws Exception;
 
-    public Entity findById(Integer id) throws Exception;
+    public Product findById(Integer id) throws Exception;
 
     public Collection<Product> findByNombre(String nombre) throws Exception;
 

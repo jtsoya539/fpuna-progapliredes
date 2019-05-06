@@ -28,6 +28,8 @@ public class ApplicationConfig extends Application {
      * out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(py.com.paronline.paronlineapi.product.domain.rest.ProductRestService.class);
+        resources.add(py.com.paronline.paronlineapi.transaction.domain.rest.TransactionRestService.class);
         resources.add(py.com.paronline.paronlineapi.user.domain.rest.UserRestService.class);
     }
 
