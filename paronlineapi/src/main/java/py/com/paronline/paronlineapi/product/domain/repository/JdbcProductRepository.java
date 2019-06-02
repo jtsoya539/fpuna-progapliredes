@@ -11,8 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import py.com.paronline.paronlineapi.common.domain.model.entity.Entity;
 import py.com.paronline.paronlineapi.product.domain.model.entity.Product;
+import py.com.paronline.paronlineapi.product.domain.model.entity.ProductCategory;
 import py.com.paronline.paronlineapi.util.DBUtils;
 
 /**
@@ -22,9 +22,9 @@ import py.com.paronline.paronlineapi.util.DBUtils;
 public class JdbcProductRepository implements ProductRepository {
 
     @Override
-    public boolean containsNombre(String nombre) {
+    public boolean containsDescripcion(String descripcion) {
         try {
-            return this.findByNombre(nombre).size() > 0;
+            return this.findByDescripcion(descripcion).size() > 0;
         } catch (Exception ex) {
             //Exception Handler
         }
@@ -32,9 +32,9 @@ public class JdbcProductRepository implements ProductRepository {
     }
 
     @Override
-    public boolean containsIdCategoria(int idCategoria) {
+    public boolean containsCategoria(ProductCategory categoria) {
         try {
-            return this.findByIdCategoria(idCategoria).size() > 0;
+            return this.findByCategoria(categoria).size() > 0;
         } catch (Exception ex) {
             //Exception Handler
         }
@@ -52,7 +52,7 @@ public class JdbcProductRepository implements ProductRepository {
     }
 
     @Override
-    public Collection<Product> findByNombre(String nombre) throws Exception {
+    public Collection<Product> findByDescripcion(String descripcion) throws Exception {
         Collection<Product> retValue = new ArrayList();
 
         Connection conn = null;
@@ -63,12 +63,12 @@ public class JdbcProductRepository implements ProductRepository {
             conn = DBUtils.getConnection();
             pstmt = conn.prepareStatement("SELECT * FROM producto WHERE descripcion = ?");
 
-            pstmt.setString(1, nombre);
+            pstmt.setString(1, descripcion);
 
             rs = pstmt.executeQuery();
 
-            if (rs.next()) {
-                retValue.add(new Product(rs.getInt("id_producto"), rs.getString("descripcion"), rs.getInt("id_categoria"), rs.getDouble("precio_unit"), rs.getInt("cantidad")));
+            while (rs.next()) {
+                retValue.add(new Product(rs.getInt("id_producto"), rs.getString("descripcion"), getProductCategory(rs.getInt("id_categoria")), rs.getDouble("precio_unit"), rs.getInt("cantidad")));
             }
 
         } catch (Exception e) {
@@ -91,7 +91,7 @@ public class JdbcProductRepository implements ProductRepository {
     }
 
     @Override
-    public Collection<Product> findByIdCategoria(int idCategoria) throws Exception {
+    public Collection<Product> findByCategoria(ProductCategory categoria) throws Exception {
         Collection<Product> retValue = new ArrayList();
 
         Connection conn = null;
@@ -102,12 +102,12 @@ public class JdbcProductRepository implements ProductRepository {
             conn = DBUtils.getConnection();
             pstmt = conn.prepareStatement("SELECT * FROM producto WHERE id_categoria = ?");
 
-            pstmt.setInt(1, idCategoria);
+            pstmt.setInt(1, categoria.getId());
 
             rs = pstmt.executeQuery();
 
-            if (rs.next()) {
-                retValue.add(new Product(rs.getInt("id_producto"), rs.getString("descripcion"), rs.getInt("id_categoria"), rs.getDouble("precio_unit"), rs.getInt("cantidad")));
+            while (rs.next()) {
+                retValue.add(new Product(rs.getInt("id_producto"), rs.getString("descripcion"), getProductCategory(rs.getInt("id_categoria")), rs.getDouble("precio_unit"), rs.getInt("cantidad")));
             }
 
         } catch (Exception e) {
@@ -145,8 +145,8 @@ public class JdbcProductRepository implements ProductRepository {
 
             rs = pstmt.executeQuery();
 
-            if (rs.next()) {
-                retValue.add(new Product(rs.getInt("id_producto"), rs.getString("descripcion"), rs.getInt("id_categoria"), rs.getDouble("precio_unit"), rs.getInt("cantidad")));
+            while (rs.next()) {
+                retValue.add(new Product(rs.getInt("id_producto"), rs.getString("descripcion"), getProductCategory(rs.getInt("id_categoria")), rs.getDouble("precio_unit"), rs.getInt("cantidad")));
             }
 
         } catch (Exception e) {
@@ -178,7 +178,7 @@ public class JdbcProductRepository implements ProductRepository {
             pstmt = conn.prepareStatement("INSERT INTO producto (descripcion, id_categoria, precio_unit, cantidad) VALUES (?, ?, ?, ?)");
 
             pstmt.setString(1, entity.getDescripcion());
-            pstmt.setInt(2, entity.getIdCategoria());
+            pstmt.setInt(2, entity.getCategoria().getId());
             pstmt.setDouble(3, entity.getPrecioUnit());
             pstmt.setInt(4, entity.getCantidad());
 
@@ -233,7 +233,7 @@ public class JdbcProductRepository implements ProductRepository {
             pstmt = conn.prepareStatement("UPDATE producto SET descripcion = ?, id_categoria = ?, precio_unit = ?, cantidad = ? WHERE id_producto = ?");
 
             pstmt.setString(1, entity.getDescripcion());
-            pstmt.setInt(2, entity.getIdCategoria());
+            pstmt.setInt(2, entity.getCategoria().getId());
             pstmt.setDouble(3, entity.getPrecioUnit());
             pstmt.setInt(4, entity.getCantidad());
             pstmt.setInt(5, entity.getId());
@@ -255,7 +255,7 @@ public class JdbcProductRepository implements ProductRepository {
 
     @Override
     public boolean contains(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.get(id).getId() > 0;
     }
 
     @Override
@@ -275,9 +275,9 @@ public class JdbcProductRepository implements ProductRepository {
             rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                retValue = new Product(rs.getInt("id_producto"), rs.getString("descripcion"), rs.getInt("id_categoria"), rs.getDouble("precio_unit"), rs.getInt("cantidad"));
+                retValue = new Product(rs.getInt("id_producto"), rs.getString("descripcion"), getProductCategory(rs.getInt("id_categoria")), rs.getDouble("precio_unit"), rs.getInt("cantidad"));
             } else {
-                retValue = new Product(0, null, 0, 0, 0);
+                retValue = new Product();
             }
 
         } catch (Exception e) {
@@ -314,7 +314,47 @@ public class JdbcProductRepository implements ProductRepository {
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                retValue.add(new Product(rs.getInt("id_producto"), rs.getString("descripcion"), rs.getInt("id_categoria"), rs.getDouble("precio_unit"), rs.getInt("cantidad")));
+                retValue.add(new Product(rs.getInt("id_producto"), rs.getString("descripcion"), getProductCategory(rs.getInt("id_categoria")), rs.getDouble("precio_unit"), rs.getInt("cantidad")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                DBUtils.closeConnection(conn);
+            } catch (SQLException ex) {
+                //Logger.getLogger(UsuarioManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return retValue;
+    }
+
+    private ProductCategory getProductCategory(Integer id) {
+        ProductCategory retValue = null;
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            pstmt = conn.prepareStatement("SELECT * FROM categoria WHERE id_categoria = ?");
+
+            pstmt.setInt(1, id);
+
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                retValue = new ProductCategory(rs.getInt("id_categoria"), rs.getString("descripcion"));
+            } else {
+                retValue = new ProductCategory();
             }
 
         } catch (Exception e) {

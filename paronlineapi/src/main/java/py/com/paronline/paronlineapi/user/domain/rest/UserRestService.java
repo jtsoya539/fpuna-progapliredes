@@ -27,7 +27,7 @@ public class UserRestService {
     @Path("users")
     @Produces(MediaType.APPLICATION_JSON)
     public ArrayList<User> getUsers() {
-        ArrayList<User> users = (ArrayList) userService.getAll();
+        ArrayList<User> users = (ArrayList<User>) userService.getAll();
         return users;
     }
 
@@ -35,34 +35,35 @@ public class UserRestService {
     @Path("users/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public User getUser(@PathParam("id") Integer id) {
-        User entity = null;
+        User user = null;
         try {
-            entity = (User) userService.findById(id);
+            user = userService.findById(id);
         } catch (Exception ex) {
             Logger.getLogger(UserRestService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return entity;
+        return user;
     }
 
     @POST
     @Path("users")
-    @Consumes("application/json")
-    @Produces("application/json")
-    public User addUser(User entity) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public User addUser(User user) {
         try {
-            userService.add(entity);
+            userService.add(user);
         } catch (Exception ex) {
             Logger.getLogger(UserRestService.class.getName()).log(Level.SEVERE, null, ex);
+            user = null;
         }
-        return entity;
+        return user;
     }
 
     @PUT
     @Path("users")
-    @Consumes("application/json")
-    public void updateUser(User entity) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void updateUser(User user) {
         try {
-            userService.update(entity);
+            userService.update(user);
         } catch (Exception ex) {
             Logger.getLogger(UserRestService.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -6,6 +6,7 @@
 package py.com.paronline.paronlineapi;
 
 import py.com.paronline.paronlineapi.product.domain.model.entity.Product;
+import py.com.paronline.paronlineapi.product.domain.model.entity.ProductCategory;
 import py.com.paronline.paronlineapi.product.domain.repository.JdbcProductRepository;
 import py.com.paronline.paronlineapi.product.domain.service.ProductServiceImpl;
 import py.com.paronline.paronlineapi.user.domain.model.entity.User;
@@ -19,12 +20,12 @@ import py.com.paronline.paronlineapi.user.domain.service.UserServiceImpl;
 public class Program {
 
     public static void main(String[] args) throws Exception {
-        UserServiceImpl userService = new UserServiceImpl(new JdbcUserRepository());
-        User user = new User(6, "Ruffus", "Meza", "ruffus@shitzhu.com", "ruffito", "123456", 0);
+        //UserServiceImpl userService = new UserServiceImpl(new JdbcUserRepository());
+        //User user = new User(6, "Ruffus", "Meza", "ruffus@shitzhu.com", "ruffito", "123456", 0);
         //userService.add(user);
 
         ProductServiceImpl productService = new ProductServiceImpl(new JdbcProductRepository());
-        Product product = new Product(4, "Samsung Galaxy S10", 2, 4800000, 2);
+        Product product = new Product(4, "Huawei P30", new ProductCategory(2, ""), 4800000, 2);
         productService.add(product);
         //productService.update(product);
         //productService.delete(1);

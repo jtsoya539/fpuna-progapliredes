@@ -7,38 +7,52 @@ package py.com.paronline.paronlineapi.transaction.domain.model.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import py.com.paronline.paronlineapi.user.domain.model.entity.User;
 
 /**
  *
  * @author javie
  */
+@XmlRootElement
 public class Transaction {
 
     private int id;
     private Date fecha;
-    private int idCliente;
+    private User cliente;
     private double total;
     private String direccionEnvio;
     private int idMedioPago;
     private int nroTarjeta;
-    private String Estado;
+    private String estado;
     private ArrayList<TransactionDetail> detalles;
 
     public Transaction() {
+        this.id = 0;
+        this.fecha = new Date();
+        this.cliente = new User();
+        this.total = 0;
+        this.direccionEnvio = "";
+        this.idMedioPago = 0;
+        this.nroTarjeta = 0;
+        this.estado = "";
+        this.detalles = null;
     }
 
-    public Transaction(int id, Date fecha, int idCliente, double total, String direccionEnvio, int idMedioPago, int nroTarjeta, String Estado, ArrayList<TransactionDetail> detalles) {
+    public Transaction(int id, Date fecha, User cliente, double total, String direccionEnvio, int idMedioPago, int nroTarjeta, String estado, ArrayList<TransactionDetail> detalles) {
         this.id = id;
         this.fecha = fecha;
-        this.idCliente = idCliente;
+        this.cliente = cliente;
         this.total = total;
         this.direccionEnvio = direccionEnvio;
         this.idMedioPago = idMedioPago;
         this.nroTarjeta = nroTarjeta;
-        this.Estado = Estado;
+        this.estado = estado;
         this.detalles = detalles;
     }
 
+    @XmlElement
     public int getId() {
         return id;
     }
@@ -47,6 +61,7 @@ public class Transaction {
         this.id = id;
     }
 
+    @XmlElement
     public Date getFecha() {
         return fecha;
     }
@@ -55,14 +70,16 @@ public class Transaction {
         this.fecha = fecha;
     }
 
-    public int getIdCliente() {
-        return idCliente;
+    @XmlElement
+    public User getCliente() {
+        return cliente;
     }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setCliente(User cliente) {
+        this.cliente = cliente;
     }
 
+    @XmlElement
     public double getTotal() {
         return total;
     }
@@ -71,6 +88,7 @@ public class Transaction {
         this.total = total;
     }
 
+    @XmlElement
     public String getDireccionEnvio() {
         return direccionEnvio;
     }
@@ -79,6 +97,7 @@ public class Transaction {
         this.direccionEnvio = direccionEnvio;
     }
 
+    @XmlElement
     public int getIdMedioPago() {
         return idMedioPago;
     }
@@ -87,6 +106,7 @@ public class Transaction {
         this.idMedioPago = idMedioPago;
     }
 
+    @XmlElement
     public int getNroTarjeta() {
         return nroTarjeta;
     }
@@ -95,14 +115,16 @@ public class Transaction {
         this.nroTarjeta = nroTarjeta;
     }
 
+    @XmlElement
     public String getEstado() {
-        return Estado;
+        return estado;
     }
 
-    public void setEstado(String Estado) {
-        this.Estado = Estado;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
+    @XmlElement
     public ArrayList<TransactionDetail> getDetalles() {
         return detalles;
     }
@@ -113,7 +135,7 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{" + "id=" + id + ", fecha=" + fecha + ", idCliente=" + idCliente + ", total=" + total + ", direccionEnvio=" + direccionEnvio + ", idMedioPago=" + idMedioPago + ", nroTarjeta=" + nroTarjeta + ", Estado=" + Estado + ", detalles=" + detalles + '}';
+        return "Transaction{" + "id=" + id + ", fecha=" + fecha + ", cliente=" + cliente + ", total=" + total + ", direccionEnvio=" + direccionEnvio + ", idMedioPago=" + idMedioPago + ", nroTarjeta=" + nroTarjeta + ", estado=" + estado + ", detalles=" + detalles + '}';
     }
 
 }

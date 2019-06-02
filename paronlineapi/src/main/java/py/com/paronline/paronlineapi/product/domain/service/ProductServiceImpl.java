@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Map;
 import py.com.paronline.paronlineapi.common.domain.service.BaseService;
 import py.com.paronline.paronlineapi.product.domain.model.entity.Product;
+import py.com.paronline.paronlineapi.product.domain.model.entity.ProductCategory;
 import py.com.paronline.paronlineapi.product.domain.repository.ProductRepository;
 
 /**
@@ -27,7 +28,7 @@ public class ProductServiceImpl extends BaseService<Product, Integer> implements
 
     @Override
     public void add(Product product) throws Exception {
-        if (this.productRepository.containsNombre(product.getDescripcion())) {
+        if (this.productRepository.containsDescripcion(product.getDescripcion())) {
             throw new Exception(String.format("Ya existe un producto con la descripcion %s", product.getDescripcion()));
         }
 
@@ -54,18 +55,18 @@ public class ProductServiceImpl extends BaseService<Product, Integer> implements
     }
 
     @Override
-    public Collection<Product> findByNombre(String nombre) throws Exception {
-        return this.productRepository.findByNombre(nombre);
+    public Collection<Product> findByDescripcion(String descripcion) throws Exception {
+        return this.productRepository.findByDescripcion(descripcion);
     }
 
     @Override
-    public Collection<Product> findByIdCategoria(int idCategoria) throws Exception {
-        return this.productRepository.findByIdCategoria(idCategoria);
+    public Collection<Product> findByCategoria(ProductCategory categoria) throws Exception {
+        return this.productRepository.findByCategoria(categoria);
     }
 
     @Override
     public Collection<Product> findByPrecioUnit(double precioUnit) throws Exception {
-        return this.findByPrecioUnit(precioUnit);
+        return this.productRepository.findByPrecioUnit(precioUnit);
     }
 
     @Override

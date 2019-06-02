@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package py.com.paronline.paronlineapi.user.domain.model.entity;
+package py.com.paronline.paronline.model;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -24,13 +24,6 @@ public class User {
     private int tipoCliente;
 
     public User() {
-        this.id = 0;
-        this.nombre = "";
-        this.apellido = "";
-        this.email = "";
-        this.loginName = "";
-        this.passwd = "";
-        this.tipoCliente = 0;
     }
 
     public User(int id, String nombre, String apellido, String email, String loginName, String passwd, int tipoCliente) {

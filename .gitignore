@@ -28,3 +28,4 @@ hs_err_pid*
 /paronlineapi/build/
 /paronlineapi/dist/
 /paronlineapi/target/
+/paronline/target/

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import py.com.paronline.paronlineapi.product.domain.model.entity.Product;
+import py.com.paronline.paronlineapi.product.domain.model.entity.ProductCategory;
 
 /**
  *
@@ -24,11 +25,12 @@ public interface ProductService {
 
     public Product findById(Integer id) throws Exception;
 
-    public Collection<Product> findByNombre(String nombre) throws Exception;
+    public Collection<Product> findByDescripcion(String descripcion) throws Exception;
 
-    public Collection<Product> findByIdCategoria(int idCategoria) throws Exception;
+    public Collection<Product> findByCategoria(ProductCategory categoria) throws Exception;
 
     public Collection<Product> findByPrecioUnit(double precioUnit) throws Exception;
 
     public Collection<Product> findByCriteria(Map<String, ArrayList<String>> name) throws Exception;
+
 }

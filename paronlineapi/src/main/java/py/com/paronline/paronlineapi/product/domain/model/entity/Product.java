@@ -17,17 +17,22 @@ public class Product {
 
     private int id;
     private String descripcion;
-    private int idCategoria;
+    private ProductCategory categoria;
     private double precioUnit;
     private int cantidad;
 
     public Product() {
+        this.id = 0;
+        this.descripcion = "";
+        this.categoria = new ProductCategory();
+        this.precioUnit = 0;
+        this.cantidad = 0;
     }
 
-    public Product(int id, String descripcion, int idCategoria, double precioUnit, int cantidad) {
+    public Product(int id, String descripcion, ProductCategory categoria, double precioUnit, int cantidad) {
         this.id = id;
         this.descripcion = descripcion;
-        this.idCategoria = idCategoria;
+        this.categoria = categoria;
         this.precioUnit = precioUnit;
         this.cantidad = cantidad;
     }
@@ -51,12 +56,12 @@ public class Product {
     }
 
     @XmlElement
-    public int getIdCategoria() {
-        return idCategoria;
+    public ProductCategory getCategoria() {
+        return categoria;
     }
 
-    public void setIdCategoria(int idCategoria) {
-        this.idCategoria = idCategoria;
+    public void setCategoria(ProductCategory categoria) {
+        this.categoria = categoria;
     }
 
     @XmlElement
@@ -79,7 +84,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" + "id=" + id + ", descripcion=" + descripcion + ", idCategoria=" + idCategoria + ", precioUnit=" + precioUnit + ", cantidad=" + cantidad + '}';
+        return "Product{" + "id=" + id + ", descripcion=" + descripcion + ", categoria=" + categoria + ", precioUnit=" + precioUnit + ", cantidad=" + cantidad + '}';
     }
 
 }

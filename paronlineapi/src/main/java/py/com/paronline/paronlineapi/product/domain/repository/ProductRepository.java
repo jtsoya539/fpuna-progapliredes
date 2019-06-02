@@ -8,6 +8,7 @@ package py.com.paronline.paronlineapi.product.domain.repository;
 import java.util.Collection;
 import py.com.paronline.paronlineapi.common.domain.repository.Repository;
 import py.com.paronline.paronlineapi.product.domain.model.entity.Product;
+import py.com.paronline.paronlineapi.product.domain.model.entity.ProductCategory;
 
 /**
  *
@@ -15,15 +16,15 @@ import py.com.paronline.paronlineapi.product.domain.model.entity.Product;
  */
 public interface ProductRepository extends Repository<Product, Integer> {
 
-    public boolean containsNombre(String nombre);
+    public boolean containsDescripcion(String descripcion);
 
-    public boolean containsIdCategoria(int idCategoria);
+    public boolean containsCategoria(ProductCategory categoria);
 
     public boolean containsPrecioUnit(double precioUnit);
 
-    public Collection<Product> findByNombre(String nombre) throws Exception;
+    public Collection<Product> findByDescripcion(String descripcion) throws Exception;
 
-    public Collection<Product> findByIdCategoria(int idCategoria) throws Exception;
+    public Collection<Product> findByCategoria(ProductCategory categoria) throws Exception;
 
     public Collection<Product> findByPrecioUnit(double precioUnit) throws Exception;
 

@@ -5,6 +5,7 @@
  */
 package py.com.paronline.paronlineapi.transaction.domain.service;
 
+import java.util.Collection;
 import py.com.paronline.paronlineapi.transaction.domain.model.entity.Transaction;
 
 /**
@@ -20,5 +21,11 @@ public interface TransactionService {
     public void delete(Integer id) throws Exception;
 
     public Transaction findById(Integer id) throws Exception;
+
+    public Collection<Transaction> findByCliente(String nombre, String apellido) throws Exception;
+
+    public Collection<Transaction> findByEstado(String estado) throws Exception;
+
+    public Collection<Transaction> findByTotal(double total) throws Exception;
 
 }

@@ -148,7 +148,7 @@ public class JdbcUserRepository implements UserRepository {
      */
     @Override
     public boolean contains(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.get(id).getId() > 0;
     }
 
     /**
@@ -175,7 +175,7 @@ public class JdbcUserRepository implements UserRepository {
             if (rs.next()) {
                 retValue = new User(rs.getInt("id_cliente"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("email"), rs.getString("login_name"), rs.getString("passwd"), rs.getInt("tipo_cliente"));
             } else {
-                retValue = new User(0, null, null, null, null, null, 0);
+                retValue = new User();
             }
 
         } catch (Exception e) {

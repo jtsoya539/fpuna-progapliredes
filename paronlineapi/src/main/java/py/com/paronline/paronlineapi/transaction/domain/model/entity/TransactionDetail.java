@@ -5,31 +5,43 @@
  */
 package py.com.paronline.paronlineapi.transaction.domain.model.entity;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import py.com.paronline.paronlineapi.product.domain.model.entity.Product;
+
 /**
  *
  * @author javie
  */
+@XmlRootElement
 public class TransactionDetail {
 
     private int idTransaccion;
     private int item;
-    private int idProducto;
+    private Product producto;
     private int cantidad;
     private double precio;
     private double subTotal;
 
     public TransactionDetail() {
+        this.idTransaccion = 0;
+        this.item = 0;
+        this.producto = new Product();
+        this.cantidad = 0;
+        this.precio = 0;
+        this.subTotal = 0;
     }
 
-    public TransactionDetail(int idTransaccion, int item, int idProducto, int cantidad, double precio, double subTotal) {
+    public TransactionDetail(int idTransaccion, int item, Product producto, int cantidad, double precio, double subTotal) {
         this.idTransaccion = idTransaccion;
         this.item = item;
-        this.idProducto = idProducto;
+        this.producto = producto;
         this.cantidad = cantidad;
         this.precio = precio;
         this.subTotal = subTotal;
     }
 
+    @XmlElement
     public int getIdTransaccion() {
         return idTransaccion;
     }
@@ -38,6 +50,7 @@ public class TransactionDetail {
         this.idTransaccion = idTransaccion;
     }
 
+    @XmlElement
     public int getItem() {
         return item;
     }
@@ -46,14 +59,16 @@ public class TransactionDetail {
         this.item = item;
     }
 
-    public int getIdProducto() {
-        return idProducto;
+    @XmlElement
+    public Product getProducto() {
+        return producto;
     }
 
-    public void setIdProducto(int idProducto) {
-        this.idProducto = idProducto;
+    public void setProducto(Product producto) {
+        this.producto = producto;
     }
 
+    @XmlElement
     public int getCantidad() {
         return cantidad;
     }
@@ -62,6 +77,7 @@ public class TransactionDetail {
         this.cantidad = cantidad;
     }
 
+    @XmlElement
     public double getPrecio() {
         return precio;
     }
@@ -70,6 +86,7 @@ public class TransactionDetail {
         this.precio = precio;
     }
 
+    @XmlElement
     public double getSubTotal() {
         return subTotal;
     }
@@ -80,7 +97,7 @@ public class TransactionDetail {
 
     @Override
     public String toString() {
-        return "TransactionDetail{" + "idTransaccion=" + idTransaccion + ", item=" + item + ", idProducto=" + idProducto + ", cantidad=" + cantidad + ", precio=" + precio + ", subTotal=" + subTotal + '}';
+        return "TransactionDetail{" + "idTransaccion=" + idTransaccion + ", item=" + item + ", producto=" + producto + ", cantidad=" + cantidad + ", precio=" + precio + ", subTotal=" + subTotal + '}';
     }
 
 }

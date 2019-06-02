@@ -5,20 +5,50 @@
  */
 package py.com.paronline.paronlineapi.product.domain.model.entity;
 
-import py.com.paronline.paronlineapi.common.domain.model.entity.BaseEntity;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author javie
  */
-public class ProductCategory extends BaseEntity<Integer> {
+@XmlRootElement
+public class ProductCategory {
+
+    private int id;
+    private String descripcion;
 
     public ProductCategory() {
-        super(0, "Sin nombre");
+        this.id = 0;
+        this.descripcion = "";
     }
 
-    public ProductCategory(Integer id, String nombre) {
-        super(id, nombre);
+    public ProductCategory(int id, String descripcion) {
+        this.id = id;
+        this.descripcion = descripcion;
+    }
+
+    @XmlElement
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @XmlElement
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductCategory{" + "id=" + id + ", descripcion=" + descripcion + '}';
     }
 
 }
