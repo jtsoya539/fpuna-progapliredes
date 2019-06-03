@@ -24,6 +24,13 @@ public class User {
     private int tipoCliente;
 
     public User() {
+        this.id = 0;
+        this.nombre = "";
+        this.apellido = "";
+        this.email = "";
+        this.loginName = "";
+        this.passwd = "";
+        this.tipoCliente = 0;
     }
 
     public User(int id, String nombre, String apellido, String email, String loginName, String passwd, int tipoCliente) {
