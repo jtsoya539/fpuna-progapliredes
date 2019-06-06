@@ -13,5 +13,9 @@
     </head>
     <body>
         <h1>¡Bienvenido/a a PAR On Line!</h1>
+
+        <a href="${pageContext.request.contextPath}/User">Usuarios</a>
+        <a href="${pageContext.request.contextPath}/Product">Productos</a>
+        <a href="${pageContext.request.contextPath}/Transaction">Transacciones</a>
     </body>
 </html>

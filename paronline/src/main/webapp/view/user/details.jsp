@@ -31,5 +31,7 @@
             <dt>Tipo</dt>
             <dd><%= usuario.getTipoCliente()%></dd>
         </dl>
+
+        <a href="${pageContext.request.contextPath}/User">Volver</a>
     </body>
 </html>

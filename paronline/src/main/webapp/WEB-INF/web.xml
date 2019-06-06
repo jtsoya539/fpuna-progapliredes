@@ -9,6 +9,14 @@
         <servlet-name>HomeController</servlet-name>
         <servlet-class>py.com.paronline.paronline.controller.HomeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductController</servlet-name>
+        <servlet-class>py.com.paronline.paronline.controller.ProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TransactionController</servlet-name>
+        <servlet-class>py.com.paronline.paronline.controller.TransactionController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/User</url-pattern>
@@ -16,6 +24,14 @@
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/Home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductController</servlet-name>
+        <url-pattern>/Product</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TransactionController</servlet-name>
+        <url-pattern>/Transaction</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

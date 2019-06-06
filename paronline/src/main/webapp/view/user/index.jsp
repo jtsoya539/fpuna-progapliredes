@@ -57,6 +57,7 @@
                 %>
             </tbody>
         </table>
+        <a href="${pageContext.request.contextPath}/Home">Inicio</a>
 
         <script src="js/site.js"></script>
     </body>
